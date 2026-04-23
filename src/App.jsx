@@ -75,9 +75,7 @@ export default function PortfolioSite() {
     const el = document.getElementById(sectionId);
     if (!el) return;
 
-    const headerOffset = 100;
-    const y =
-      el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+    const y = el.getBoundingClientRect().top + window.pageYOffset - 110;
 
     window.scrollTo({
       top: y,
@@ -94,7 +92,6 @@ export default function PortfolioSite() {
     </div>
   );
 }
-
 function EyeHoverCard() {
   const cardRef = useRef(null);
   const [hovered, setHovered] = useState(false);
@@ -221,9 +218,11 @@ function SharedHeader({ navigate }) {
   const handleNavigate = (key) => {
     setMenuOpen(false);
 
-    setTimeout(() => {
-      navigate(key);
-    }, 250);
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        navigate(key);
+      }, 80);
+    });
   };
 
   return (
@@ -292,7 +291,6 @@ function SharedHeader({ navigate }) {
     </header>
   );
 }
-
 function HomePage() {
   const [errors, setErrors] = useState({});
   const [sending, setSending] = useState(false);
@@ -355,30 +353,35 @@ function HomePage() {
   }
   return (
     <main className="space-y-8 md:space-y-10">
-      <section id="home" className="scroll-mt-24">
+      <section>
         <HeroSection />
       </section>
 
-      <section id="about" className="scroll-mt-24">
+      <section>
         <MiddleSection />
       </section>
 
-      <section id="projects" className="scroll-mt-24">
+      <section>
         <ServicesSection />
       </section>
 
-      <section id="skills" className="scroll-mt-24">
+      <section>
         <BottomSection />
       </section>
 
-      <section id="contact" className="scroll-mt-24 pt-16 pb-10">
+      <section className="px-3 pt-16 pb-10 sm:px-0">
+        <div id="contact" className="scroll-mt-28 md:scroll-mt-32 h-0" />
+        <div className="mx-auto mt-16 max-w-[760px]"></div>
         <div className="mx-auto max-w-[760px]">
-          <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:p-8 transition hover:border-white/20 hover:bg-white/[0.05]">
+          <div className="overflow-visible rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:p-8 transition hover:border-white/20 hover:bg-white/[0.05]">
             <div className="mb-6">
               <div className="text-[10px] uppercase tracking-[0.3em] text-white/30">
                 Contact
               </div>
-              <h2 className="mt-2 text-[26px] md:text-[34px] font-light tracking-tight">
+              <h2
+                id="contact"
+                className="mt-2 scroll-mt-28 md:scroll-mt-32 text-[26px] md:text-[34px] font-light tracking-tight"
+              >
                 Let’s Connect
               </h2>
               <p className="mt-2 text-sm text-white/40 max-w-[420px]">
@@ -529,12 +532,17 @@ function HeroSection() {
         className="pt-8 md:pt-12 lg:pt-20"
       >
         <div className="max-w-[620px]">
-          <p className="text-[14vw] leading-[0.88] md:text-[90px] lg:text-[110px] font-light tracking-tight uppercase">
+          <p
+            id="home"
+            className="scroll-mt-28 md:scroll-mt-32 text-[14vw] leading-[0.88] md:text-[90px] lg:text-[110px] font-light tracking-tight uppercase"
+          >
             WELCOME
           </p>
+
           <div className="mt-3 flex items-end gap-4 md:gap-8 lg:gap-10 text-[11vw] leading-none md:text-[70px] lg:text-[86px] uppercase">
             <span className="font-light">to</span>
           </div>
+
           <p className="mt-2 text-[11vw] leading-[0.92] md:text-[70px] lg:text-[84px] font-light uppercase">
             MY SPACE
           </p>
@@ -732,8 +740,7 @@ function CertificateToggle() {
 
 function MiddleSection() {
   const cardClass =
-    "w-full max-w-full overflow-hidden rounded-[24px] md:rounded-[28px] lg:rounded-[34px] border border-white/25 p-5 md:p-6 lg:p-7 min-h-full flex flex-col justify-between";
-
+    "w-full max-w-full overflow-visible rounded-[24px] md:rounded-[28px] lg:rounded-[34px] border border-white/25 p-5 md:p-6 lg:p-7 min-h-full flex flex-col justify-between";
   const infoTextClass =
     "mt-1 space-y-2 text-[10px] md:text-[11px] uppercase tracking-[0.18em] text-white/78 leading-relaxed";
 
@@ -750,13 +757,17 @@ function MiddleSection() {
   ];
 
   return (
-    <div className="py-4 md:py-8 lg:py-12 overflow-hidden">
+    <section className="pt-4 md:pt-8 lg:pt-10 pb-2 md:pb-4 lg:pb-6 overflow-x-hidden overflow-y-visible px-3 sm:px-0">
       <div className="flex items-center justify-center py-6 md:py-10 lg:py-12 text-center">
         <div>
           <div className="text-[7px] md:text-[10px] uppercase tracking-[0.28em] md:tracking-[0.35em] text-white/35">
             — academic background —
           </div>
-          <h2 className="mt-2 md:mt-3 text-[24px] md:text-[36px] lg:text-[52px] font-light uppercase tracking-[0.12em] md:tracking-[0.15em] text-white/95">
+
+          <h2
+            id="about"
+            className="mt-2 md:mt-3 scroll-mt-28 md:scroll-mt-32 text-[24px] md:text-[36px] lg:text-[52px] font-light uppercase tracking-[0.12em] md:tracking-[0.15em] text-white/95"
+          >
             Education
           </h2>
         </div>
@@ -889,7 +900,7 @@ function MiddleSection() {
           </div>
         </motion.div>
       </section>
-    </div>
+    </section>
   );
 }
 
@@ -938,14 +949,17 @@ function ServicesSection() {
   ];
 
   return (
-    <section className="py-10 md:py-14 lg:py-16">
+    <section className="pt-16 md:pt-20 lg:pt-24 pb-10 md:pb-14 lg:pb-16 px-3 sm:px-0">
       <div className="mx-auto max-w-[760px]">
         <div className="text-center">
           <div className="mx-auto w-fit rounded-full border border-white/15 px-4 py-1 text-[10px] uppercase tracking-[0.28em] text-white/45">
             Selected Projects
           </div>
 
-          <h2 className="mt-6 text-[30px] md:text-[42px] lg:text-[52px] font-light tracking-[-0.03em] text-white">
+          <h2
+            id="projects"
+            className="mt-6 scroll-mt-28 md:scroll-mt-32 text-[30px] md:text-[42px] lg:text-[52px] font-light tracking-[-0.03em] text-white"
+          >
             Projects
           </h2>
 
@@ -1122,7 +1136,10 @@ function BottomSection() {
           transition={{ duration: 0.65 }}
         >
           <div className="mb-8">
-            <h2 className="text-[32px] md:text-[42px] lg:text-[50px] font-light tracking-[-0.03em] text-white">
+            <h2
+              id="skills"
+              className="scroll-mt-28 md:scroll-mt-32 text-[32px] md:text-[42px] lg:text-[50px] font-light tracking-[-0.03em] text-white"
+            >
               Skills &amp; Technologies
             </h2>
             <p className="mt-3 max-w-[560px] text-sm md:text-base leading-relaxed text-white/40">
