@@ -70,13 +70,19 @@ const topCards = [
     meta: ["WEB PROJECT", "NSC 2025"],
   },
 ];
-
 export default function PortfolioSite() {
   const scrollToSection = (sectionId) => {
     const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    if (!el) return;
+
+    const headerOffset = 100;
+    const y =
+      el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+
+    window.scrollTo({
+      top: y,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -213,8 +219,11 @@ function SharedHeader({ navigate }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleNavigate = (key) => {
-    navigate(key);
     setMenuOpen(false);
+
+    setTimeout(() => {
+      navigate(key);
+    }, 250);
   };
 
   return (
@@ -346,23 +355,23 @@ function HomePage() {
   }
   return (
     <main className="space-y-8 md:space-y-10">
-      <section id="home">
+      <section id="home" className="scroll-mt-24">
         <HeroSection />
       </section>
 
-      <section id="about">
+      <section id="about" className="scroll-mt-24">
         <MiddleSection />
       </section>
 
-      <section id="projects">
+      <section id="projects" className="scroll-mt-24">
         <ServicesSection />
       </section>
 
-      <section id="skills">
+      <section id="skills" className="scroll-mt-24">
         <BottomSection />
       </section>
 
-      <section id="contact" className="pt-16 pb-10">
+      <section id="contact" className="scroll-mt-24 pt-16 pb-10">
         <div className="mx-auto max-w-[760px]">
           <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:p-8 transition hover:border-white/20 hover:bg-white/[0.05]">
             <div className="mb-6">
@@ -575,6 +584,9 @@ function HeroSection() {
                 <img
                   src={card.image}
                   alt={card.title}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                   className="h-full w-full object-cover grayscale transition duration-700 hover:scale-[1.03]"
                 />
 
