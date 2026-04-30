@@ -2,20 +2,20 @@ import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import QRCodeImport from "react-qr-code";
 import emailjs from "@emailjs/browser";
-import picport1 from "./assets/picport1.png";
-import darkback from "./assets/darkback.jpg";
-import eyeswhite from "./assets/eyeswhite.png";
-import Ghost from "./assets/ghost.png";
-import ctrlg from "./assets/CTRLG.jpg";
-import iren from "./assets/iren.jpeg";
-import intern from "./assets/intern.jpeg";
-import janrawe from "./assets/janrawe.jpeg";
-import jan01 from "./assets/ja01.jpeg";
-import jan02 from "./assets/ja02.jpeg";
-import cer01 from "./assets/cer01.jpeg";
-import cer02 from "./assets/cer02.jpeg";
-import cer03 from "./assets/cer03.jpeg";
-import cer04 from "./assets/cer04.png";
+import picport1 from "./assets/picport1.webp";
+import darkback from "./assets/darkback.webp";
+import eyeswhite from "./assets/eyeswhite.webp";
+import Ghost from "./assets/ghost.webp";
+import ctrlg from "./assets/CTRLG.webp";
+import iren from "./assets/iren.webp";
+import intern from "./assets/intern.webp";
+import janrawe from "./assets/janrawe.webp";
+import jan01 from "./assets/ja01.webp";
+import jan02 from "./assets/ja02.webp";
+import cer01 from "./assets/cer01.webp";
+import cer02 from "./assets/cer02.webp";
+import cer03 from "./assets/cer03.webp";
+import cer04 from "./assets/cer04.webp";
 
 const QRCodeComponent = QRCodeImport.default || QRCodeImport;
 
@@ -62,6 +62,7 @@ const topCards = [
     id: "01",
     title: "KHWANJAI",
     image: picport1,
+    loading: "eager",
     meta: ["CERTIFICATES"],
   },
   {
@@ -174,6 +175,8 @@ function EyeHoverCard() {
       >
         <img
           src={darkback}
+          loading="lazy"
+          decoding="async"
           alt="Selected project background"
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out"
           style={{
@@ -183,6 +186,8 @@ function EyeHoverCard() {
 
         <img
           src={eyeswhite}
+          loading="lazy"
+          decoding="async"
           alt="Eyes"
           className="pointer-events-none absolute inset-0 h-full w-full object-cover transition-transform duration-150 ease-out"
           style={{
@@ -814,6 +819,7 @@ function CertificateToggle() {
                 <div className="overflow-hidden rounded-[14px] border border-white/10 bg-white/5 transition duration-300 group-hover:border-white/25">
                   <img
                     src={item.image}
+                    loading="lazy"
                     alt={item.title}
                     draggable="false"
                     className="aspect-[4/3] w-full object-cover bg-white grayscale transition duration-300 group-hover:grayscale-0"
@@ -938,6 +944,8 @@ function MiddleSection() {
                         <img
                           src={item.src}
                           alt={item.label}
+                          loading="lazy"
+                          decoding="async"
                           className="h-full w-full object-cover grayscale transition duration-500 hover:grayscale-0"
                         />
                       </div>
@@ -1129,6 +1137,8 @@ function ProjectCard({ project }) {
               <img
                 src={project.icon}
                 alt={project.title}
+                loading="lazy"
+                decoding="async"
                 onError={(e) => {
                   e.currentTarget.src = Ghost;
                 }}
