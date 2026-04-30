@@ -15,6 +15,7 @@ import jan02 from "./assets/ja02.jpeg";
 import cer01 from "./assets/cer01.jpeg";
 import cer02 from "./assets/cer02.jpeg";
 import cer03 from "./assets/cer03.jpeg";
+import cer04 from "./assets/cer04.png";
 
 const QRCodeComponent = QRCodeImport.default || QRCodeImport;
 
@@ -567,7 +568,7 @@ function HeroSection() {
             {card.title}
           </div>
 
-          <div className="relative h-[390px] overflow-hidden bg-white/5">
+          <div className="relative h-[390px] overflow-hidden bg-white/5 flex flex-col">
             {card.id === "02" ? (
               <a
                 href="https://carelia.sunny420x.com"
@@ -614,7 +615,9 @@ function HeroSection() {
           </div>
 
           {card.id === "01" ? (
-            <CertificateToggle />
+            <div className="min-h-[120px]">
+              <CertificateToggle />
+            </div>
           ) : (
             <div className="mt-2 flex justify-between text-[9px] md:text-[10px] uppercase tracking-[0.18em] text-white/65">
               <span>{card.meta[0]}</span>
@@ -630,13 +633,23 @@ function HeroSection() {
 function CertificateToggle() {
   const [open, setOpen] = useState(false);
   const [selectedCertificate, setSelectedCertificate] = useState(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const scrollRef = useRef(null);
+
+  const drag = useRef({
+    isDown: false,
+    startX: 0,
+    scrollLeft: 0,
+    moved: false,
+  });
 
   const certificates = [
     {
-      id: 1,
-      image: cer01,
-      title: "WEB DEVELOPMENT",
-      subtitle: "NEXT.JS • MYSQL",
+      id: 4,
+      image: cer04,
+      title: "SOFTWARE TESTING",
+      subtitle: "INTERNSHIP CERTIFICATE",
     },
     {
       id: 2,
@@ -650,10 +663,82 @@ function CertificateToggle() {
       title: "BLOCKCHAIN WORKSHOP",
       subtitle: "PARTICIPATION CERTIFICATE",
     },
+    {
+      id: 1,
+      image: cer01,
+      title: "WEB DEVELOPMENT",
+      subtitle: "NEXT.JS • MYSQL",
+    },
   ];
+
+  const checkScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    setCanScrollLeft(el.scrollLeft > 5);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 5);
+  };
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el || !open) return;
+
+    el.scrollLeft = 0;
+    requestAnimationFrame(checkScroll);
+
+    el.addEventListener("scroll", checkScroll);
+    window.addEventListener("resize", checkScroll);
+
+    return () => {
+      el.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("resize", checkScroll);
+    };
+  }, [open]);
+
+  const scrollCertificates = (direction) => {
+    if (!scrollRef.current) return;
+
+    scrollRef.current.scrollBy({
+      left: direction === "left" ? -188 : 188,
+      behavior: "smooth",
+    });
+
+    setTimeout(checkScroll, 350);
+  };
+
+  const handleMouseDown = (e) => {
+    if (!scrollRef.current) return;
+
+    drag.current = {
+      isDown: true,
+      startX: e.pageX - scrollRef.current.offsetLeft,
+      scrollLeft: scrollRef.current.scrollLeft,
+      moved: false,
+    };
+  };
+
+  const handleMouseMove = (e) => {
+    if (!drag.current.isDown || !scrollRef.current) return;
+
+    e.preventDefault();
+
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - drag.current.startX) * 1.2;
+
+    if (Math.abs(walk) > 5) {
+      drag.current.moved = true;
+    }
+
+    scrollRef.current.scrollLeft = drag.current.scrollLeft - walk;
+  };
+
+  const stopDrag = () => {
+    drag.current.isDown = false;
+  };
 
   return (
     <div className="mt-2 relative z-20">
+      <style>{`.cert-scrollbar-hide::-webkit-scrollbar { display: none; }`}</style>
       <div className="flex items-center justify-between gap-3 text-[9px] md:text-[10px] uppercase tracking-[0.18em] text-white/65">
         <div className="leading-relaxed">
           <div>CERTIFICATES</div>
@@ -679,30 +764,71 @@ function CertificateToggle() {
         transition={{ duration: 0.28, ease: "easeInOut" }}
         className="overflow-hidden"
       >
-        <div className="flex gap-4 overflow-x-auto pb-2 pr-1">
-          {certificates.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => setSelectedCertificate(item)}
-              className="w-[150px] md:w-[170px] shrink-0 text-left group"
-            >
-              <div className="overflow-hidden rounded-[14px] border border-white/10 bg-white/5 transition duration-300 group-hover:border-white/25">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="aspect-[4/3] w-full object-cover bg-white grayscale transition duration-300 group-hover:grayscale-0"
-                />
-              </div>
+        <div className="mx-auto w-full max-w-[542px]">
+          <div className="mb-3 flex justify-end gap-2">
+            {canScrollLeft && (
+              <button
+                type="button"
+                onClick={() => scrollCertificates("left")}
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-black text-white/70 transition hover:bg-white hover:text-black"
+                aria-label="Previous certificate"
+              >
+                ‹
+              </button>
+            )}
 
-              <p className="mt-2 text-[9px] md:text-[10px] uppercase tracking-[0.18em] text-white/50">
-                {item.title}
-              </p>
-              <p className="mt-1 text-[8px] md:text-[9px] uppercase tracking-[0.16em] text-white/30">
-                {item.subtitle}
-              </p>
-            </button>
-          ))}
+            {canScrollRight && (
+              <button
+                type="button"
+                onClick={() => scrollCertificates("right")}
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-black text-white/70 transition hover:bg-white hover:text-black"
+                aria-label="Next certificate"
+              >
+                ›
+              </button>
+            )}
+          </div>
+
+          <div
+            ref={scrollRef}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={stopDrag}
+            onMouseLeave={stopDrag}
+            className="cert-scrollbar-hide flex cursor-grab snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2 active:cursor-grabbing"
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
+          >
+            {certificates.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => {
+                  if (drag.current.moved) return;
+                  setSelectedCertificate(item);
+                }}
+                className="w-[170px] shrink-0 snap-start text-left group"
+              >
+                <div className="overflow-hidden rounded-[14px] border border-white/10 bg-white/5 transition duration-300 group-hover:border-white/25">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    draggable="false"
+                    className="aspect-[4/3] w-full object-cover bg-white grayscale transition duration-300 group-hover:grayscale-0"
+                  />
+                </div>
+
+                <p className="mt-2 whitespace-nowrap text-[9px] md:text-[10px] uppercase tracking-[0.18em] text-white/50 transition group-hover:text-white/80">
+                  {item.title}
+                </p>
+                <p className="mt-1 whitespace-nowrap text-[8px] md:text-[9px] uppercase tracking-[0.16em] text-white/30">
+                  {item.subtitle}
+                </p>
+              </button>
+            ))}
+          </div>
         </div>
       </motion.div>
 
