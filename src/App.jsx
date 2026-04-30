@@ -376,7 +376,6 @@ function HomePage() {
       </section>
 
       <section className="px-3 pt-16 pb-10 sm:px-0">
-        <div id="contact" className="scroll-mt-28 md:scroll-mt-32 h-0" />
         <div className="mx-auto mt-16 max-w-[760px]"></div>
         <div className="mx-auto max-w-[760px]">
           <div className="overflow-visible rounded-[28px] border border-white/10 bg-white/[0.03] p-6 md:p-8 transition hover:border-white/20 hover:bg-white/[0.05]">
@@ -406,7 +405,9 @@ function HomePage() {
                 href="https://www.facebook.com/kkwankhwanjai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition hover:border-white hover:text-white hover:scale-110"
+                aria-label="Facebook profile"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition hover:border-white hover:text-white hover:scale-110
+focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black"
               >
                 <i className="ri-facebook-line text-[16px]" />
               </a>
@@ -415,7 +416,9 @@ function HomePage() {
                 href="https://www.instagram.com/k.kwan_u/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition hover:border-white hover:text-white hover:scale-110"
+                aria-label="Instagram profile"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition hover:border-white hover:text-white hover:scale-110
+focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black"
               >
                 <i className="ri-instagram-line text-[16px]" />
               </a>
@@ -424,7 +427,9 @@ function HomePage() {
                 href="https://www.linkedin.com/in/khwanjai-koaleta-a2a5b9379/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition hover:border-white hover:text-white hover:scale-110"
+                aria-label="LinkedIn profile"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition hover:border-white hover:text-white hover:scale-110
+focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black"
               >
                 <i className="ri-linkedin-line text-[16px]" />
               </a>
@@ -433,7 +438,9 @@ function HomePage() {
                 href="https://x.com/kwankhwanjai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition hover:border-white hover:text-white hover:scale-110"
+                aria-label="X (Twitter) profile"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition hover:border-white hover:text-white hover:scale-110
+focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black"
               >
                 <i className="ri-twitter-x-line text-[16px]" />
               </a>
@@ -501,13 +508,18 @@ function HomePage() {
               <button
                 type="submit"
                 disabled={sending}
-                className="rounded-full bg-white px-6 py-2.5 text-sm font-medium text-black transition hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.25)] disabled:cursor-not-allowed disabled:opacity-60"
+                className="rounded-full bg-white px-6 py-2.5 text-sm font-medium text-black transition hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.25)] disabled:cursor-not-allowed disabled:opacity-60
+focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black focus:transition"
               >
                 {sending ? "Sending..." : "Send"}
               </button>
 
               {status === "sent" && (
-                <div className="mt-3 flex justify-center">
+                <div
+                  className="mt-3 flex justify-center"
+                  role="status"
+                  aria-live="polite"
+                >
                   <p className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white/70">
                     ✓ Message sent successfully
                   </p>
@@ -515,7 +527,11 @@ function HomePage() {
               )}
 
               {status === "error" && (
-                <div className="mt-3 flex justify-center">
+                <div
+                  className="mt-3 flex justify-center"
+                  role="alert"
+                  aria-live="assertive"
+                >
                   <p className="rounded-full border border-red-400/30 bg-red-400/10 px-4 py-2 text-sm text-red-300">
                     Failed to send. Please try again.
                   </p>
@@ -1190,6 +1206,7 @@ function ProjectCard({ project }) {
           <button
             type="button"
             onClick={() => setShowQR((prev) => !prev)}
+            aria-label="Toggle QR code preview"
             className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/50 transition hover:scale-110 hover:text-white hover:border-white"
           >
             ◻︎
