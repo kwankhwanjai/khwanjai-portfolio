@@ -16,6 +16,8 @@ import cer01 from "./assets/cer01.webp";
 import cer02 from "./assets/cer02.webp";
 import cer03 from "./assets/cer03.webp";
 import cer04 from "./assets/cer04.webp";
+import cer05 from "./assets/cer05.webp";
+import cer06 from "./assets/cer06.webp";
 
 const QRCodeComponent = QRCodeImport.default || QRCodeImport;
 
@@ -689,6 +691,18 @@ function CertificateToggle() {
       image: cer01,
       title: "WEB DEVELOPMENT",
       subtitle: "NEXT.JS • MYSQL",
+    },
+    {
+      id: 5,
+      image: cer05,
+      title: "EVENT SUPPORT",
+      subtitle: "WRO 2024 • OPERATIONS",
+    },
+    {
+      id: 6,
+      image: cer06,
+      title: "TECH WORKSHOP",
+      subtitle: "AGODA • TECH CAMP 2024",
     },
   ];
 
