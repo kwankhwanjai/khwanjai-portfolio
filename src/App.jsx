@@ -18,6 +18,7 @@ import cer03 from "./assets/cer03.webp";
 import cer04 from "./assets/cer04.webp";
 import cer05 from "./assets/cer05.webp";
 import cer06 from "./assets/cer06.webp";
+import qrSomezorn from "./assets/qr-somezorn.png";
 
 const QRCodeComponent = QRCodeImport.default || QRCodeImport;
 
@@ -1072,13 +1073,13 @@ function ServicesSection() {
   const projects = [
     {
       id: "01",
-      title: "POS System",
+      title: "SomeZorn E-Commerce",
       description:
-        "A real-time point of sale system built for second-hand retail. Fast checkout, stock tracking, and seamless transaction flow",
+        "A full-stack second-hand fashion e-commerce platform featuring product browsing, authentication, shopping cart, order management, and secure online payments.",
       icon: Ghost,
-      demo: "https://example.com/then",
-      github: "https://github.com/yourname/then",
-      comingSoon: true,
+      demo: "https://ecommerce-somezorn.pages.dev/",
+      github: "https://github.com/kwankhwanjai/ecommerce-SomeZorn",
+      comingSoon: false,
     },
     {
       id: "02",
@@ -1152,8 +1153,8 @@ function ProjectCard({ project }) {
           <div className="group relative h-14 w-14 shrink-0">
             {/* glow วิ่งรอบกรอบ */}
             <div
-              className="absolute inset-0 rounded-[16px] p-[1.5px] 
-    bg-[conic-gradient(from_0deg,rgba(255,255,255,0.6),transparent,rgba(255,255,255,0.6))] 
+              className="absolute inset-0 rounded-[16px] p-[1.5px]
+    bg-[conic-gradient(from_0deg,rgba(255,255,255,0.6),transparent,rgba(255,255,255,0.6))]
     animate-[spin_6s_linear_infinite]"
             >
               <div className="h-full w-full rounded-[14px] bg-black" />
@@ -1172,9 +1173,9 @@ function ProjectCard({ project }) {
                 onError={(e) => {
                   e.currentTarget.src = Ghost;
                 }}
-                className="h-full w-full object-contain p-2 
-      animate-[float_3s_ease-in-out_infinite] 
-      transition duration-500 
+                className="h-full w-full object-contain p-2
+      animate-[float_3s_ease-in-out_infinite]
+      transition duration-500
       group-hover:scale-110 group-hover:rotate-3
       group-hover:rotate-[6deg] group-hover:scale-110"
               />
@@ -1235,7 +1236,12 @@ function ProjectCard({ project }) {
       >
         <div className="flex justify-center">
           <div className="rounded-[16px] bg-white p-3 shadow-[0_10px_40px_rgba(255,255,255,0.08)]">
-            <QRCodeComponent value={project.demo} size={110} />
+            <img
+              src={qrSomezorn}
+              alt="SomeZorn QR Code"
+              className="h-[110px] w-[110px] object-contain"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>
@@ -1392,7 +1398,7 @@ function ExperienceTimeline() {
     },
     {
       title: "Software Tester Intern",
-      subtitle: "PDKM Co., Ltd. — Nextate System",
+      subtitle: "PDKM Co., Ltd. — Nextate",
       desc: "Conducted end-to-end testing for the Nextate platform, including vehicle entry/exit systems and resident mobile applications Designed and executed test scenarios and test cases to validate system functionality and user workflows Performed manual testing and regression testing to ensure system stability after updates Tested APIs using Postman to verify data flow and backend integration Identified, documented, and tracked defects using structured bug reports and defect tracking processes Collaborated with developers to reproduce issues and ensure timely resolution Contributed to improving overall system reliability and user experience (UX)",
       side: "left",
     },
