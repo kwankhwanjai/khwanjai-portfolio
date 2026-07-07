@@ -1083,9 +1083,9 @@ function ServicesSection() {
     },
     {
       id: "02",
-      title: "SOMEZORN",
+      title: "TableTrack",
       description:
-        "A curated second-hand fashion platform focused on minimal browsing and smooth shopping experience.",
+        "A restaurant booking system designed to track reservations by date, helping staff manage tables and customer bookings efficiently.",
       icon: Ghost,
       demo: "https://example.com/idle",
       github: "https://github.com/yourname/idle",
