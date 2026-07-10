@@ -19,6 +19,7 @@ import cer04 from "./assets/cer04.webp";
 import cer05 from "./assets/cer05.webp";
 import cer06 from "./assets/cer06.webp";
 import qrSomezorn from "./assets/qr-somezorn.png";
+import qrtableflow from "./assets/qr-codetableflow.png";
 
 const QRCodeComponent = QRCodeImport.default || QRCodeImport;
 
@@ -1079,6 +1080,8 @@ function ServicesSection() {
       icon: Ghost,
       demo: "https://ecommerce-somezorn.pages.dev/",
       github: "https://github.com/kwankhwanjai/ecommerce-SomeZorn",
+      qr: qrSomezorn,
+
       comingSoon: false,
     },
     {
@@ -1087,9 +1090,10 @@ function ServicesSection() {
       description:
         "A restaurant booking system designed to track reservations by date, helping staff manage tables and customer bookings efficiently.",
       icon: Ghost,
-      demo: "https://example.com/idle",
-      github: "https://github.com/yourname/idle",
-      comingSoon: true,
+      demo: "https://tableflow-2n8.pages.dev/",
+      github: "https://github.com/kwankhwanjai/TableFlow",
+      qr: qrtableflow,
+      comingSoon: false,
     },
     {
       id: "03",
@@ -1237,8 +1241,8 @@ function ProjectCard({ project }) {
         <div className="flex justify-center">
           <div className="rounded-[16px] bg-white p-3 shadow-[0_10px_40px_rgba(255,255,255,0.08)]">
             <img
-              src={qrSomezorn}
-              alt="SomeZorn QR Code"
+              src={project.qr}
+              alt={`${project.title} QR Code`}
               className="h-[110px] w-[110px] object-contain"
               loading="lazy"
             />
@@ -1261,7 +1265,7 @@ function BottomSection() {
         "php",
         "React",
         "Node.js",
-        "API",
+        "Vite",
         "Tailwind",
         "Next.js",
         "Angular",
