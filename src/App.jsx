@@ -1074,7 +1074,7 @@ function ServicesSection() {
   const projects = [
     {
       id: "01",
-      title: "SomeZorn E-Commerce",
+      title: "SomeZorn",
       description:
         "A full-stack second-hand fashion e-commerce platform featuring product browsing, authentication, shopping cart, order management, and secure online payments.",
       icon: Ghost,
@@ -1097,9 +1097,9 @@ function ServicesSection() {
     },
     {
       id: "03",
-      title: "TASK MANAGER",
+      title: "Nexlo",
       description:
-        "A lightweight task management system with intuitive drag-and-drop interaction and structured workflow.",
+        "The next-generation gaming marketplace connecting players to buy, sell, and discover digital game assets effortlessly.",
       icon: Ghost,
       demo: "https://example.com/aim",
       github: "https://github.com/yourname/aim",
@@ -1107,9 +1107,9 @@ function ServicesSection() {
     },
     {
       id: "04",
-      title: "LootFlow",
+      title: "Stoq",
       description:
-        "A streamlined game item trading system with cart, order tracking, and real-time delivery updates.",
+        "Inspired by real retail operations, this inventory management system simplifies stock control, product tracking, and sales analytics in one place.",
       icon: Ghost,
       demo: "https://example.com/ease",
       github: "https://github.com/yourname/ease",
@@ -1265,7 +1265,6 @@ function BottomSection() {
         "php",
         "React",
         "Node.js",
-        "Vite",
         "Tailwind",
         "Next.js",
         "Angular",
