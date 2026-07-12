@@ -1388,9 +1388,9 @@ function ServiceCard({ item, compact = false }) {
 function ExperienceTimeline() {
   const steps = [
     {
-      title: "Vocational Certificate (Business in Healthcare)",
-      subtitle: "Janrawee Vocational College",
-      desc: "Studied Business in Healthcare, building discipline and communication skills. Worked as a nursing assistant with hands-on experience in wound care, home visits, and supporting health check-ups during COVID-19.Completed a 3-month internship at Ma Khuea Chae Subdistrict Health Promoting Hospital, and assisted in ATK screening for students.",
+      title: "Software Tester Intern",
+      subtitle: "PDKM Co., Ltd. — Nextate",
+      desc: "Conducted end-to-end testing for the Nextate platform, including vehicle entry/exit systems and resident mobile applications Designed and executed test scenarios and test cases to validate system functionality and user workflows Performed manual testing and regression testing to ensure system stability after updates Tested APIs using Postman to verify data flow and backend integration Identified, documented, and tracked defects using structured bug reports and defect tracking processes Collaborated with developers to reproduce issues and ensure timely resolution Contributed to improving overall system reliability and user experience (UX)",
       side: "left",
     },
     {
@@ -1400,9 +1400,15 @@ function ExperienceTimeline() {
       side: "right",
     },
     {
-      title: "Software Tester Intern",
-      subtitle: "PDKM Co., Ltd. — Nextate",
-      desc: "Conducted end-to-end testing for the Nextate platform, including vehicle entry/exit systems and resident mobile applications Designed and executed test scenarios and test cases to validate system functionality and user workflows Performed manual testing and regression testing to ensure system stability after updates Tested APIs using Postman to verify data flow and backend integration Identified, documented, and tracked defects using structured bug reports and defect tracking processes Collaborated with developers to reproduce issues and ensure timely resolution Contributed to improving overall system reliability and user experience (UX)",
+      title: "Vocational Certificate (Business in Healthcare)",
+      subtitle: "Janrawee Vocational College",
+      desc: "Studied Business in Healthcare, building discipline and communication skills. Worked as a nursing assistant with hands-on experience in wound care, home visits, and supporting health check-ups during COVID-19.Completed a 3-month internship at Ma Khuea Chae Subdistrict Health Promoting Hospital, and assisted in ATK screening for students.",
+      side: "left",
+    },
+    {
+      title: "Healthcare Internship",
+      subtitle: "Janrawee Vocational College",
+      desc: "Studied Business in Healthcare, developing strong discipline, communication, and patient care skills. Completed a 3-month professional internship at Ma Khuea Chae Subdistrict Health Promoting Hospital, gaining hands-on experience in the Outpatient Department (OPD) and Emergency Room (ER). Assisted with patient registration, basic nursing care, wound dressing, vital sign monitoring, emergency support, home visits, and health check-up activities during the COVID-19 pandemic, including ATK screening for students.",
       side: "left",
     },
     {
