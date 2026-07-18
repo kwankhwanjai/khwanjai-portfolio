@@ -1256,35 +1256,50 @@ function ProjectCard({ project }) {
 function BottomSection() {
   const skillGroups = [
     {
-      title: "Fullstack Dev",
+      title: "Frontend Dev",
       items: [
         "HTML",
         "CSS",
         "JavaScript",
-        "Python",
-        "php",
+        "TypeScript",
         "React",
-        "Node.js",
-        "Tailwind",
         "Next.js",
-        "Angular",
+        "Tailwind CSS",
+        "Responsive Design",
+        "UI Implementation",
       ],
     },
     {
-      title: "Tester",
+      title: "Backend & Database",
+      items: [
+        "Node.js",
+        "Express.js",
+        "REST API",
+        "JWT Authentication",
+        "MongoDB",
+        "MySQL",
+        "Supabase",
+      ],
+    },
+    {
+      title: "Testing & Tools",
       items: [
         "Manual Testing",
         "Test Case Design",
-        "Bug Tracking",
-        "Postman",
-        "QA Flow",
+        "Test Scenario",
+        "API Testing (Postman)",
+        "Regression Testing",
+        "Git",
+        "GitHub",
+        "VS Code",
+        "Figma",
+        "Chrome DevTools",
+        "Vite",
+        "Cloudflare Pages",
       ],
     },
-    {
-      title: "Tools",
-      items: ["GitHub", "VS Code", "Vite", "Figma", "MySQL", "XAMPP"],
-    },
   ];
+
   const experiences = [
     {
       year: "2025",
