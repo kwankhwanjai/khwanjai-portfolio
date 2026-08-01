@@ -924,7 +924,6 @@ function MiddleSection() {
     { src: ctrlg, label: "CTRL G × UNIVERSITY" },
     { src: iren, label: "UX/UI WORKSHOP IRENE PEREYRA" },
     { src: intern, label: "PDKM INTERNSHIP" },
-    { src: domestika, label: "THE NARRATIVE WEB × UX/UI" },
   ];
 
   return (
