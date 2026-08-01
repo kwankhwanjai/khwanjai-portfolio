@@ -20,7 +20,7 @@ import cer05 from "./assets/cer05.webp";
 import cer06 from "./assets/cer06.webp";
 import qrSomezorn from "./assets/qr-somezorn.png";
 import qrtableflow from "./assets/qr-codetableflow.png";
-
+import domestika from "./assets/certificateUX_UI.jpg";
 const QRCodeComponent = QRCodeImport.default || QRCodeImport;
 
 const homeMenu = [
@@ -706,6 +706,12 @@ function CertificateToggle() {
       title: "TECH WORKSHOP",
       subtitle: "AGODA • TECH CAMP 2024",
     },
+    {
+      id: 7,
+      image: domestika,
+      title: "UX/UI DESIGN",
+      subtitle: "DOMESTIKA • THE NARRATIVE WEB",
+    },
   ];
 
   const checkScroll = () => {
@@ -918,6 +924,7 @@ function MiddleSection() {
     { src: ctrlg, label: "CTRL G × UNIVERSITY" },
     { src: iren, label: "UX/UI WORKSHOP IRENE PEREYRA" },
     { src: intern, label: "PDKM INTERNSHIP" },
+    { src: domestika, label: "THE NARRATIVE WEB × UX/UI" },
   ];
 
   return (
