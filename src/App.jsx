@@ -90,7 +90,7 @@ export default function PortfolioSite() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden bg-black text-white selection:bg-white selection:text-black">
       <div className="mx-auto max-w-[1600px] px-4 md:px-8 lg:px-10 pb-16">
         <SharedHeader navigate={scrollToSection} />
         <HomePage />
@@ -112,17 +112,21 @@ function EyeHoverCard() {
     bgY: 0,
   });
   const [blink, setBlink] = useState(false);
+  const blinkTimeout = useRef(null);
 
   useEffect(() => {
     const blinkInterval = setInterval(
       () => {
         setBlink(true);
-        setTimeout(() => setBlink(false), 160);
+        blinkTimeout.current = setTimeout(() => setBlink(false), 160);
       },
       2600 + Math.random() * 1800,
     );
 
-    return () => clearInterval(blinkInterval);
+    return () => {
+      clearInterval(blinkInterval);
+      if (blinkTimeout.current) clearTimeout(blinkTimeout.current);
+    };
   }, []);
 
   const handleMove = (e) => {
@@ -193,7 +197,7 @@ function EyeHoverCard() {
           loading="lazy"
           decoding="async"
           alt="Eyes"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover transition-transform duration-150 ease-out"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover transition-transform duration-150 ease-out motion-reduce:transition-none"
           style={{
             transform: `translate(${offset.eyeX}px, ${offset.eyeY}px) scaleY(${blink ? 0.08 : 1})`,
             transformOrigin: "center center",
@@ -236,8 +240,11 @@ function SharedHeader({ navigate }) {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-black/90 backdrop-blur-md">
-      <div className="border-b border-white/8">
+    <header
+      className="sticky top-0 z-50 border-b border-white/8 bg-black/90 backdrop-blur-md"
+      aria-label="Primary navigation"
+    >
+      <div>
         <div className="flex items-center justify-between pt-5 pb-4 text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.24em]">
           <div className="flex w-full items-center justify-between md:hidden">
             <button
@@ -256,7 +263,10 @@ function SharedHeader({ navigate }) {
           </div>
 
           <div className="hidden w-full items-start justify-between md:flex">
-            <nav className="flex gap-6 md:gap-10 lg:gap-14 font-semibold">
+            <nav
+              aria-label="Main navigation"
+              className="flex gap-6 font-semibold md:gap-10 lg:gap-14"
+            >
               {homeMenu.map((item) => (
                 <button
                   key={item.key}
@@ -284,7 +294,7 @@ function SharedHeader({ navigate }) {
           transition={{ duration: 0.25, ease: "easeInOut" }}
           className="overflow-hidden md:hidden"
         >
-          <nav className="flex flex-col pb-4">
+          <nav aria-label="Mobile navigation" className="flex flex-col pb-4">
             {homeMenu.map((item) => (
               <button
                 key={item.key}
@@ -456,10 +466,20 @@ focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ri
               className="mt-2 flex flex-col gap-3"
             >
               <div>
+                <label htmlFor="contact-name" className="sr-only">
+                  Your name
+                </label>
                 <input
+                  id="contact-name"
                   type="text"
                   name="name"
                   placeholder="Your name"
+                  autoComplete="name"
+                  required
+                  aria-invalid={Boolean(errors.name)}
+                  aria-describedby={
+                    errors.name ? "contact-name-error" : undefined
+                  }
                   className={`w-full rounded-full border bg-transparent px-5 py-2.5 text-sm text-white placeholder-white/30 outline-none transition ${
                     errors.name
                       ? "border-red-400 focus:border-red-400"
@@ -467,17 +487,30 @@ focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ri
                   }`}
                 />
                 {errors.name && (
-                  <p className="mt-2 px-2 text-[11px] uppercase tracking-[0.12em] text-red-400/90">
+                  <p
+                    id="contact-name-error"
+                    className="mt-2 px-2 text-[11px] uppercase tracking-[0.12em] text-red-400/90"
+                  >
                     {errors.name}
                   </p>
                 )}
               </div>
 
               <div>
+                <label htmlFor="contact-email" className="sr-only">
+                  Your email
+                </label>
                 <input
+                  id="contact-email"
                   type="email"
                   name="email"
                   placeholder="Enter your email"
+                  autoComplete="email"
+                  required
+                  aria-invalid={Boolean(errors.email)}
+                  aria-describedby={
+                    errors.email ? "contact-email-error" : undefined
+                  }
                   className={`w-full rounded-full border bg-transparent px-5 py-2.5 text-sm text-white placeholder-white/30 outline-none transition ${
                     errors.email
                       ? "border-red-400 focus:border-red-400"
@@ -485,17 +518,29 @@ focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ri
                   }`}
                 />
                 {errors.email && (
-                  <p className="mt-2 px-2 text-[11px] uppercase tracking-[0.12em] text-red-400/90">
+                  <p
+                    id="contact-email-error"
+                    className="mt-2 px-2 text-[11px] uppercase tracking-[0.12em] text-red-400/90"
+                  >
                     {errors.email}
                   </p>
                 )}
               </div>
 
               <div>
+                <label htmlFor="contact-message" className="sr-only">
+                  Your message
+                </label>
                 <textarea
+                  id="contact-message"
                   name="message"
                   placeholder="Your message"
                   rows={5}
+                  required
+                  aria-invalid={Boolean(errors.message)}
+                  aria-describedby={
+                    errors.message ? "contact-message-error" : undefined
+                  }
                   className={`w-full rounded-[24px] border bg-transparent px-5 py-4 text-sm text-white placeholder-white/30 outline-none transition ${
                     errors.message
                       ? "border-red-400 focus:border-red-400"
@@ -503,7 +548,10 @@ focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ri
                   }`}
                 />
                 {errors.message && (
-                  <p className="mt-2 px-2 text-[11px] uppercase tracking-[0.12em] text-red-400/90">
+                  <p
+                    id="contact-message-error"
+                    className="mt-2 px-2 text-[11px] uppercase tracking-[0.12em] text-red-400/90"
+                  >
                     {errors.message}
                   </p>
                 )}
@@ -512,7 +560,7 @@ focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ri
               <button
                 type="submit"
                 disabled={sending}
-                className="rounded-full bg-white px-6 py-2.5 text-sm font-medium text-black transition hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.25)] disabled:cursor-not-allowed disabled:opacity-60
+                className="rounded-full bg-white px-6 py-2.5 text-sm font-medium text-black transition hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.25)] disabled:cursor-not-allowed disabled:opacity-60 motion-reduce:transition-none
 focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black focus:transition"
               >
                 {sending ? "Sending..." : "Send"}
@@ -632,11 +680,7 @@ function HeroSection() {
               </div>
             )}
 
-            <div className="pointer-events-none absolute inset-0 ring-1 ring-white/10" />
-
-            <div className="pointer-events-none absolute left-0 bottom-3 z-10 text-5xl md:text-6xl font-light tracking-tight text-white/90">
-              {card.id}
-            </div>
+            {/* The media variants render their own overlay and index label. */}
           </div>
 
           {card.id === "01" ? (
@@ -737,6 +781,17 @@ function CertificateToggle() {
       window.removeEventListener("resize", checkScroll);
     };
   }, [open]);
+
+  useEffect(() => {
+    if (!selectedCertificate) return;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") setSelectedCertificate(null);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [selectedCertificate]);
 
   const scrollCertificates = (direction) => {
     if (!scrollRef.current) return;
@@ -880,12 +935,24 @@ function CertificateToggle() {
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 px-4 py-8 backdrop-blur-sm"
           onClick={() => setSelectedCertificate(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${selectedCertificate.title} certificate`}
         >
           <div
             className="w-full max-w-3xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="overflow-hidden rounded-[20px] border border-white/10 bg-black/80 p-3 md:p-4">
+              <div className="mb-3 flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setSelectedCertificate(null)}
+                  className="rounded-full border border-white/20 px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-white/70 transition hover:border-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50"
+                >
+                  Close
+                </button>
+              </div>
               <img
                 src={selectedCertificate.image}
                 alt={selectedCertificate.title}
@@ -1210,28 +1277,37 @@ function ProjectCard({ project }) {
         </div>
 
         <div className="mt-6 flex items-center gap-3">
-          <a
-            href={project.demo}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-full bg-white px-5 py-2.5 text-[13px] font-medium text-black transition hover:opacity-80"
-          >
-            Live Demo
-          </a>
+          {project.comingSoon ? (
+            <span className="rounded-full border border-white/10 px-5 py-2.5 text-[13px] text-white/30">
+              Coming soon
+            </span>
+          ) : (
+            <>
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-white px-5 py-2.5 text-[13px] font-medium text-black transition hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-white/50"
+              >
+                Live Demo
+              </a>
 
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-full border border-white/20 px-5 py-2.5 text-[13px] text-white/80 transition hover:bg-white/10"
-          >
-            GitHub
-          </a>
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-white/20 px-5 py-2.5 text-[13px] text-white/80 transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/50"
+              >
+                GitHub
+              </a>
+            </>
+          )}
 
           <button
             type="button"
             onClick={() => setShowQR((prev) => !prev)}
-            aria-label="Toggle QR code preview"
+            aria-label={`${showQR ? "Hide" : "Show"} ${project.title} QR code`}
+            aria-expanded={showQR}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/50 transition hover:scale-110 hover:text-white hover:border-white"
           >
             ◻︎
