@@ -1506,13 +1506,16 @@ function ExperienceTimeline() {
       title: "Healthcare Internship",
       subtitle: "Janrawee Vocational College",
       desc: "Studied Business in Healthcare, developing strong discipline, communication, and patient care skills. Completed a 3-month professional internship at Ma Khuea Chae Subdistrict Health Promoting Hospital, gaining hands-on experience in the Outpatient Department (OPD) and Emergency Room (ER). Assisted with patient registration, basic nursing care, wound dressing, vital sign monitoring, emergency support, home visits, and health check-up activities during the COVID-19 pandemic, including ATK screening for students.",
-      side: "left",
+      side: "right",
     },
     {
-      title: "Now",
-      subtitle: "Ready to Work",
-      desc: "Frontend Developer with a strong focus on UI and user experience, supported by hands-on experience in system testing and real-world projects. Eager to contribute to impactful products and grow within a professional development team.",
-      side: "right",
+      title: "Robotics & Programming Instructor",
+
+      subtitle: "ClickRobot 2 Chiang Mai",
+
+      desc: "Worked as a Robotics and Programming Instructor at ClickRobot 2 Chiang Mai, teaching students to design, assemble, and program robots through hands-on projects. Taught both word-block programming and Python, covering programming fundamentals, logical thinking, problem-solving, sensors, motors, and basic robot control. Supported students in applying coding concepts to real robotic systems and encouraged creative thinking through practical STEM-based activities.",
+
+      side: "left",
     },
   ];
 
