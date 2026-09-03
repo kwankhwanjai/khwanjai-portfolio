@@ -21,6 +21,7 @@ import cer06 from "./assets/cer06.webp";
 import qrSomezorn from "./assets/qr-somezorn.png";
 import qrtableflow from "./assets/qr-codetableflow.png";
 import domestika from "./assets/certificateUX_UI.jpg";
+import International_Schools from "./assets/International_Schools.jpg";
 const QRCodeComponent = QRCodeImport.default || QRCodeImport;
 
 const homeMenu = [
@@ -755,6 +756,12 @@ function CertificateToggle() {
       image: domestika,
       title: "UX/UI DESIGN",
       subtitle: "DOMESTIKA • THE NARRATIVE WEB",
+    },
+    {
+      id: 8,
+      image: International_Schools,
+      title: "Child Protection for International Schools",
+      subtitle: "CHILD PROTECTION • INTERNATIONAL SCHOOLS",
     },
   ];
 
